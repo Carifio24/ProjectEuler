@@ -12,7 +12,7 @@ def factors(x):
         return cached_factors[x]
 
     facs = []
-    for i in range(1, floor(sqrt(x))):
+    for i in range(1, floor(sqrt(x))+1):
         if x % i == 0:
             facs.append(i)
             facs.append(x / i)
@@ -21,7 +21,7 @@ def factors(x):
 
 # Check whether x is prime
 def is_prime(x):
-    for i in range(floor(sqrt(x))):
+    for i in range(2, floor(sqrt(x))):
         if x % i == 0:
             return False
     return True

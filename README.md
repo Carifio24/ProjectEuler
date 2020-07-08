@@ -1,0 +1,1 @@
+This repository contains my personal solutions to Project Euler problems. I usually try to make my solutions reasonably efficient, but I'm more interested in solving the problems rather than optimizing as much as possible.
