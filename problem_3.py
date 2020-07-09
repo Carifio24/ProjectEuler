@@ -3,7 +3,7 @@
 # What is the largest prime factor of the number 600851475143?
 ####################################################
 
-from math import floor, sqrt
+from euler import is_prime
 
 # Get the factors of x
 def factors(x):
@@ -18,14 +18,6 @@ def factors(x):
             facs.append(x / i)
     cached_factors[x] = facs
     return facs
-
-# Check whether x is prime
-def is_prime(x):
-    for i in range(2, floor(sqrt(x))):
-        if x % i == 0:
-            return False
-    return True
-
 
 # Do the calculation
 # To avoid redundant calculations, we cache answers

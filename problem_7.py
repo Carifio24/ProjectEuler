@@ -5,15 +5,7 @@
 # What is the 10 001st prime number?
 ####################################################
 
-from math import floor, sqrt
-
-# Check whether x is prime
-def is_prime(x):
-    for i in range(2, floor(sqrt(x))+1):
-        if x % i == 0:
-            return False
-    return True
-
+from euler import is_prime
 
 # Increase val, keeping track of each time we find a prime
 # Terminate when we get to the 10,001st prime

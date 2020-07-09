@@ -11,7 +11,7 @@ def fibonacci_sequence():
         nxt = curr + prev
         prev = curr
         curr = nxt
-        yield nxt
+        yield curr
 
 # Do the calculation
 total = 0
