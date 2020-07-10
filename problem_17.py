@@ -63,7 +63,7 @@ def letter_count(n):
         ones_digit = n - 10 * tens_digit
         tens_part_letters = tens_letters[tens_digit]
         if ones_digit > 0:
-            return tens_part_letters + 1 + letter_count(ones_digit)
+            return tens_part_letters + letter_count(ones_digit)
         else:
             return tens_part_letters
     elif n > 10:
