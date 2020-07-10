@@ -18,20 +18,27 @@ n_digits = 303
 digits = [ 0 for i in range(n_digits) ]
 digits[0] = 2
 
-# Do the loop, working backwards through the digits
-# This makes handling carries easier
-# To save computations at each iteration, keep track of how many digits we have
-power = 1
-max_populated_digit = 0
-while power < 1000:
-    for i in range(max_populated_digit+1, -1, -1):
-        new_digit = 2 * digits[i]
-        if new_digit >= 10:
-            new_digit = new_digit - 10
-            digits[i+1] += 1
-            if i == max_populated_digit:
-                max_populated_digit += 1
-        digits[i] = new_digit
-    power += 1
+# For extracting digits
+# Assume the number is three digits at most
+def get_digits(n):
+    ones = n % 10
+    tens = (n - ones) // 10
+    return [ones, tens]
+
+def propagate_carries(digits):
+    for d in range(len(digits)-1):
+        if digits[d] > 9:
+            ones, tens = get_digits(digits[d])
+            digits[d] = ones
+            digits[d+1] += tens
+
+# Now, we multiply
+# We use the fact that every number is at most 100
+# This tells us that we can't get carries more than 2 places away
+# i.e. 9 * 100 = 900 - we don't need to worry about the thousands place, which would be three places away from our digit of 9
+power = 1000
+for i in range(power-1):
+    digits = [ x * 2 for x in digits ]
+    propagate_carries(digits)
 
 print(sum(digits))

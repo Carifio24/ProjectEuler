@@ -25,5 +25,7 @@ def factors(x):
     for i in range(1, floor(sqrt(x))+1):
         if x % i == 0:
             facs.append(i)
-            facs.append(x / i)
+            q = x / i
+            if q != i:
+                facs.append(q)
     return facs
