@@ -27,10 +27,9 @@
 # What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 ####################################################
 
-from euler import is_prime
+from euler import product
 
-grid =
-"""
+grid_string = """
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
@@ -53,7 +52,73 @@ grid =
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
 """
 
-# Parse the grid into integers
+# Grid dimensions
 grid_size = 20
-grid_width = grid_size
-grid_height = grid_size
+n_cols = grid_size
+n_rows = grid_size
+
+# Initialize the grid to all zeros
+grid = [[0 for i in range(n_cols)] for i in range(n_rows)]
+
+# Parse the grid string into integers
+row = 0
+col = 0
+nums = grid_string.split()
+for num in nums:
+    grid[row][col] = int(num)
+    col += 1
+    if col == n_cols:
+        col = 0
+        row += 1
+
+# The number of adjacent numbers in each product
+prod_size = 4
+
+# The largest product
+max_prod = 0
+
+# The indices to check
+indices = []
+
+# Horizontally adjacent check
+for row in range(n_rows):
+    for col in range(n_cols - prod_size):
+        indices += [[(row, col+i) for i in range(prod_size)]]
+
+# Vertically adjacent check
+for col in range(n_cols):
+    for row in range(n_rows - prod_size):
+        indices += [[(row + i, col) for i in range(prod_size)]]
+
+# Diagonally adjacent check
+min_north_row = prod_size - 1
+max_south_row = n_rows - prod_size
+min_west_col = prod_size - 1
+max_east_col = n_cols - prod_size
+for row in range(n_rows):
+    for col in range(n_cols):
+
+        # Southeast
+        if row <= max_south_row and col <= max_east_col:
+            indices += [[(row + i, col + i) for i in range(prod_size)]]
+
+        # Northwest
+        if row >= min_north_row and col >= min_west_col:
+            indices += [[(row - i, col - i) for i in range(prod_size)]]
+
+        # Southwest
+        if row <= max_south_row and col >= min_west_col:
+            indices += [[(row + i, col - i) for i in range(prod_size)]]
+
+        # Northeast
+        if row >= min_north_row and col <= max_east_col:
+            indices += [[(row - i, col + i) for i in range(prod_size)]]
+
+# We've now got all of the indices to check
+# So now we can find the max product
+for index_set in indices:
+    prod = product([grid[r][c] for (r,c) in index_set])
+    if prod > max_prod:
+        max_prod = prod
+
+print(max_prod)

@@ -41,7 +41,7 @@ def sum_of_first_n_naturals(n):
     return (n * (n + 1)) // 2
 
 def sum_of_first_n_squares(n):
-    return int(pow(n,3) / 3 + pow(n,2) / 2 + n / 6)
+    return (2 * pow(n,3) + 3 * pow(n,2) + n) // 6
 
 
 

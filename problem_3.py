@@ -3,19 +3,15 @@
 # What is the largest prime factor of the number 600851475143?
 ####################################################
 
-from euler import is_prime
+from euler import is_prime, factors
 
 # Get the factors of x
-def factors(x):
+def get_factors(x):
     global cached_factors
     if x in cached_factors:
         return cached_factors[x]
 
-    facs = []
-    for i in range(1, floor(sqrt(x))+1):
-        if x % i == 0:
-            facs.append(i)
-            facs.append(x / i)
+    facs = factors(x)
     cached_factors[x] = facs
     return facs
 
