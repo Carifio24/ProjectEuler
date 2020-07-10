@@ -13,7 +13,7 @@
 #include <sstream>
 #include <iostream>
 
-// We'll use the fact that, in C++, 'A' through 'A' are consecutive
+// We'll use the fact that, in C++, 'A' through 'Z' are consecutive
 int value(char letter) {
     return letter - 'A' + 1;
 }
