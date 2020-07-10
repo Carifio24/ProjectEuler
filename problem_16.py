@@ -18,12 +18,13 @@ n_digits = 303
 digits = [ 0 for i in range(n_digits) ]
 digits[0] = 2
 
-# Do the loop
+# Do the loop, working backwards through the digits
+# This makes handling carries easier
 # To save computations at each iteration, keep track of how many digits we have
 power = 1
 max_populated_digit = 0
 while power < 1000:
-    for i in range(max_populated_digit+1):
+    for i in range(max_populated_digit+1, -1, -1):
         new_digit = 2 * digits[i]
         if new_digit >= 10:
             new_digit = new_digit - 10
