@@ -49,4 +49,4 @@ from math import ceil, log10, sqrt
 power_of_10 = 999
 phi = (1 + sqrt(5)) / 2
 
-print(ceil( (power_of_10 + 0.5 * log10(5) ) / log10(phi)))
+print(ceil( (power_of_10 + 0.5 * log10(5) ) / log10(phi) ))
