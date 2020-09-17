@@ -33,19 +33,27 @@
 # We can extract the ith digit ai using modular arithmetic as ai = floor(10^i / n) mod 10
 # For example, if i = 2, 100/n = a1 * 10 + a2 + a3, so floor(100/n) = a1 * 10 + a2, which is equal to a2 mod 10
 
-# Using this, we can determine the length of the recurring part of the fraction
-# Proposition: The length of the recurring part of the fraction is equal to the order of 10 modulo n
-# Proof: First, we note that the a_{i+1} is determined by n and a_{i}
-# To see this, note that a_{i+1} = floor(10 * [(10^i/n) - a1])
-# Thus, once we find the smallest i, j with i < j such that aj == ai, we find the length of our recurring part
-# as j - i
+# Using this, we can determine the length of the recurring part of the fraction, which is equal to the order of 10 modulo n
 
-# Next, suppose 10^j = 10^i (mod n) for i != j
-# WLOG, we can take i < j
-# This means there exists an integer k > 0 such that 10^j - 10^i = nk
-# Using the identity x mod y = x - y * floor(x/y), we can write
-# 10^i = 10^i mod n + n * floor(10^i/n)
-# 10^j = 10^j mod n + n * floor(10^j/n)
-# Combining this with the above yields
-# nk = (10^j-10^i) mod n + n * (floor(10^j/n) - floor(10^i/n))
+def modulo_power(x, b):
+    """Find the power of x modulo b"""
+    
+    r = x % b
+    ct = 0
+    pows = {}
+    while r not in pows:
+        pows[r] = ct
+        ct += 1
+        r = x * r % b
+    return ct - pows[r]
 
+
+max_len = 0
+den = 1
+for n in range(2, 1000):
+    cycle_len = modulo_power(10, n)
+    if cycle_len > max_len:
+        max_len = cycle_len
+        den = n
+
+print(den)

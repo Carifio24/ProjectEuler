@@ -6,7 +6,7 @@
 
 import operator
 from functools import reduce
-from math import floor, sqrt
+from math import floor, sqrt, gcd
 
 # Check whether x is prime
 def is_prime(x):
@@ -25,7 +25,32 @@ def factors(x):
     for i in range(1, floor(sqrt(x))+1):
         if x % i == 0:
             facs.append(i)
-            q = x / i
+            q = x // i
             if q != i:
                 facs.append(q)
     return facs
+
+# Get the digits of a number
+# Returned in the order [ ones, tens, hundreds, ... ]
+def digits(x):
+    digits = []
+    while x > 0:
+        r = x % 10
+        digits.append(r)
+        x = (x - r) // 10
+    return digits
+
+# Get the lcm of a list of numbers
+def lcm_seq(seq):
+    if len(seq) == 0:
+        return 1
+    if len(seq) == 1:
+        return seq[0]
+    elif len(seq) == 2:
+        return lcm(*seq)
+    else:
+        return lcm_seq([ lcm(seq[0], seq[1]) ] + seq[2:])
+
+# Get the lcm of two numbers
+def lcm(a, b):
+    return abs(a*b) // gcd(a, b)
