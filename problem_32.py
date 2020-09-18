@@ -36,20 +36,16 @@
 # So we can reduce our scan space quite a bit
 
 from itertools import permutations
-
-# Make a number from the given digits
-# Digits are in order [ ones, tens, hundreds, ... ]
-def make_number(digits):
-    return sum(digits[i] * (10 ** i) for i in range(len(digits)) )
+from euler import from_digits
 
 digits = [ x for x in range(1, 10) ]
 products = set()
 for perm in permutations(digits):
     p = list(perm)
     for ndx in range(1, 5):
-        x = make_number(p[:ndx])
-        y = make_number(p[ndx:5])
-        z = make_number(p[5:])
+        x = from_digits(p[:ndx])
+        y = from_digits(p[ndx:5])
+        z = from_digits(p[5:])
         if x * y == z:
             products.add(z)
 
