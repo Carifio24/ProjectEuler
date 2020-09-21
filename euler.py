@@ -6,7 +6,7 @@
 
 import operator
 from functools import reduce
-from math import floor, sqrt, gcd
+from math import floor, sqrt, gcd, log
 
 # Check whether x is prime
 def is_prime(x):
@@ -29,6 +29,10 @@ def factors(x):
             if q != i:
                 facs.append(q)
     return facs
+
+# Get the number of digits that a number has
+def num_digits(x, base=10):
+    return floor(log(x, base)) + 1
 
 # Get the digits of a number
 # Returned in the order [ ones, tens, hundreds, ... ]
